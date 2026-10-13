@@ -1,0 +1,152 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+p-tabs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+:host ::ng-deep .p-tablist-tab-list,
+:host ::ng-deep .p-tabpanels {
+  background: var(--app-surface);
+}
+
+:host ::ng-deep .p-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 0.875rem;
+}
+
+:host ::ng-deep .p-tabpanels {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+}
+
+.vazio {
+  margin: 0;
+  color: var(--app-text-muted);
+  font-family: var(--app-mono);
+  font-size: 0.85rem;
+}
+
+:host ::ng-deep .p-tablist {
+  padding: 0 4px;
+}
+
+.linha {
+  display: flex;
+  gap: 12px;
+  padding: 2px 0;
+  font-family: var(--app-mono);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.hora {
+  color: var(--app-text-muted);
+}
+
+.tipo {
+  color: var(--app-accent);
+}
+
+.acao {
+  color: #3fb950;
+}
+
+.metricas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.metrica {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+  padding: 12px 16px;
+  border: 1px solid var(--app-border);
+  border-radius: 6px;
+  background: var(--app-bg);
+}
+
+.rotulo {
+  color: var(--app-text-muted);
+  font-size: 0.8rem;
+}
+
+.valor {
+  font-family: var(--app-mono);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.contexto {
+  margin: 0 0 12px;
+  color: var(--app-text-muted);
+  font-size: 0.875rem;
+}
+
+.contexto code {
+  color: var(--app-text);
+  font-family: var(--app-mono);
+}
+
+.passos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.passo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--app-border);
+  border-radius: 6px;
+  background: var(--app-bg);
+  animation: surgir 0.3s ease-out backwards;
+}
+
+.passo.destaque {
+  border-color: var(--app-accent);
+}
+
+.categoria {
+  color: var(--app-text-muted);
+  font-size: 0.75rem;
+}
+
+.passo.destaque .categoria {
+  color: var(--app-accent);
+}
+
+.chamada {
+  font-family: var(--app-mono);
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.explicacao {
+  font-size: 0.8rem;
+}
+
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}

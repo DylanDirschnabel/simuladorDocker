@@ -1,0 +1,59 @@
+<p-tabs value="kernel" scrollable>
+  <p-tablist>
+    <p-tab value="kernel"><i class="pi pi-microchip"></i> Ações no Kernel</p-tab>
+    <p-tab value="recursos"><i class="pi pi-chart-bar"></i> Recursos</p-tab>
+    <p-tab value="eventos"><i class="pi pi-bolt"></i> Eventos</p-tab>
+  </p-tablist>
+  <p-tabpanels>
+    <p-tabpanel value="kernel">
+      @if (operacao(); as op) {
+        <p class="contexto">O que o Docker fez para executar <code>{{ op.comando }}</code></p>
+        <div class="passos">
+          @for (passo of op.passos; track $index; let i = $index, ultimo = $last) {
+            <div class="passo" [class.destaque]="ultimo" [style.animation-delay.ms]="i * 150">
+              <span class="categoria">{{ i + 1 }} · {{ passo.categoria }}</span>
+              <code class="chamada">{{ passo.chamada }}</code>
+              <span class="explicacao">{{ passo.explicacao }}</span>
+            </div>
+          }
+        </div>
+      } @else {
+        <p class="vazio">Execute um comando no terminal para ver o que acontece por baixo.</p>
+      }
+    </p-tabpanel>
+
+    <p-tabpanel value="recursos">
+      @if (disco().camadasUnicas) {
+        <div class="metricas">
+          <div class="metrica">
+            <span class="rotulo">Disco usado pelas imagens</span>
+            <span class="valor">{{ tamanho(disco().usadoMB) }}</span>
+          </div>
+          <div class="metrica">
+            <span class="rotulo">Camadas no disco</span>
+            <span class="valor">{{ disco().camadasUnicas }}</span>
+          </div>
+          <div class="metrica">
+            <span class="rotulo">Economia por camadas compartilhadas</span>
+            <span class="valor">{{ tamanho(disco().semCompartilharMB - disco().usadoMB) }}</span>
+          </div>
+        </div>
+      } @else {
+        <p class="vazio">Nenhum recurso em uso.</p>
+      }
+    </p-tabpanel>
+
+    <p-tabpanel value="eventos">
+      @for (evento of eventos(); track $index) {
+        <div class="linha">
+          <span class="hora">{{ hora(evento.hora) }}</span>
+          <span class="tipo">{{ evento.tipo }}</span>
+          <span class="acao">{{ evento.acao }}</span>
+          <span>{{ evento.alvo }}</span>
+        </div>
+      } @empty {
+        <p class="vazio">Nenhum evento registrado.</p>
+      }
+    </p-tabpanel>
+  </p-tabpanels>
+</p-tabs>

@@ -1,0 +1,146 @@
+:host {
+  display: flex;
+}
+
+.host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  overflow: auto;
+  padding: 16px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 6px;
+}
+
+.host-cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.host-titulo {
+  color: var(--app-text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+.area {
+  flex: 1;
+  padding: 14px;
+  border: 1px dashed var(--app-border);
+  border-radius: 8px;
+}
+
+.secao {
+  margin: 0 0 12px;
+  color: var(--app-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.vazio {
+  margin: 0;
+  color: var(--app-text-muted);
+  font-size: 0.875rem;
+}
+
+.vazio code {
+  font-family: var(--app-mono);
+  color: var(--app-text);
+}
+
+.imagens {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.imagem {
+  width: 330px;
+  padding: 12px;
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  background: var(--app-bg);
+}
+
+.imagem header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+
+.nome {
+  font-weight: 600;
+}
+
+.meta {
+  color: var(--app-text-muted);
+  font-family: var(--app-mono);
+  font-size: 0.75rem;
+}
+
+.camadas {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.camada {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-left: 3px solid var(--app-accent);
+  border-radius: 4px;
+  background: var(--app-surface);
+  font-family: var(--app-mono);
+  font-size: 0.75rem;
+  animation: chegar 0.35s ease-out backwards;
+}
+
+.camada.compartilhada {
+  border-left-color: #f0b429;
+}
+
+.modo {
+  color: var(--app-text-muted);
+}
+
+.instrucao {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selo {
+  flex-shrink: 0;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: rgba(240, 180, 41, 0.15);
+  color: #f0b429;
+  font-size: 0.65rem;
+}
+
+.tamanho {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: var(--app-text-muted);
+}
+
+@keyframes chegar {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}

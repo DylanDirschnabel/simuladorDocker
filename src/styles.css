@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'primeicons/primeicons.css';
+
+:root {
+  --app-bg: #0a1628;
+  --app-surface: #10213a;
+  --app-border: #1f3556;
+  --app-text: #e6edf3;
+  --app-text-muted: #8ea3c0;
+  --app-terminal-bg: #071020;
+  --app-accent: #2496ed;
+  --app-mono: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color-scheme: dark;
+}

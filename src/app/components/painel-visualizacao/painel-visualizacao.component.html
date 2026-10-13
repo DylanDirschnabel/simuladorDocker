@@ -1,0 +1,40 @@
+<div class="host">
+  <header class="host-cabecalho">
+    <span class="host-titulo">Host · Kernel Linux</span>
+  </header>
+
+  <section class="area">
+    <h3 class="secao">Imagens</h3>
+
+    @if (!imagens().length) {
+      <p class="vazio">Nenhuma imagem local. Tente <code>docker pull nginx</code> no terminal.</p>
+    }
+
+    <div class="imagens">
+      @for (imagem of imagens(); track imagem.id) {
+        <div class="imagem">
+          <header>
+            <span class="nome">{{ imagem.repositorio }}:{{ imagem.tag }}</span>
+            <span class="meta">{{ imagem.id }} · {{ tamanhoImagem(imagem) }}</span>
+          </header>
+          <ol class="camadas">
+            @for (camada of camadasDeCima(imagem); track camada.digest; let i = $index, total = $count) {
+              <li
+                class="camada"
+                [class.compartilhada]="usos(camada) > 1"
+                [title]="camada.digest"
+                [style.animation-delay.ms]="(total - 1 - i) * 200">
+                <span class="modo">ro</span>
+                <span class="instrucao">{{ camada.instrucao }}</span>
+                @if (usos(camada) > 1) {
+                  <span class="selo" [title]="'camada compartilhada por ' + usos(camada) + ' imagens'">×{{ usos(camada) }}</span>
+                }
+                <span class="tamanho">{{ tamanho(camada.tamanhoMB) }}</span>
+              </li>
+            }
+          </ol>
+        </div>
+      }
+    </div>
+  </section>
+</div>

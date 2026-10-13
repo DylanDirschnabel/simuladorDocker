@@ -1,0 +1,73 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--app-terminal-bg);
+  border: 1px solid var(--app-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.painel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--app-surface);
+  border-bottom: 1px solid var(--app-border);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--app-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.terminal {
+  flex: 1;
+  overflow: auto;
+  padding: 14px 16px;
+  font-family: var(--app-mono);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  cursor: text;
+}
+
+.linha {
+  min-height: 1.5em;
+  white-space: pre;
+}
+
+.saida {
+  color: #cdd9ea;
+}
+
+.erro {
+  color: #f85149;
+}
+
+.info {
+  color: #58a6ff;
+  white-space: pre-wrap;
+}
+
+.prompt {
+  color: #3fb950;
+  font-weight: 600;
+}
+
+.entrada {
+  display: flex;
+  gap: 0.5em;
+}
+
+.entrada input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--app-text);
+  font: inherit;
+  caret-color: var(--app-text);
+}

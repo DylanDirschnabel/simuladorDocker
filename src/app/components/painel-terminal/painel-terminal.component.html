@@ -1,0 +1,27 @@
+<header class="painel-header">
+  <i class="pi pi-code"></i>
+  <span>Terminal</span>
+</header>
+
+<div class="terminal" #terminal (click)="focar()">
+  @for (linha of linhas; track $index) {
+    @if (linha.tipo === 'comando') {
+      <div class="linha"><span class="prompt">{{ prompt }}</span> {{ linha.texto }}</div>
+    } @else {
+      <div class="linha" [class]="linha.tipo">{{ linha.texto }}</div>
+    }
+  }
+  <div class="linha entrada">
+    <span class="prompt">{{ prompt }}</span>
+    <input
+      #entrada
+      [(ngModel)]="comando"
+      (keydown.enter)="executar()"
+      (keydown.arrowup)="navegarHistorico($event, -1)"
+      (keydown.arrowdown)="navegarHistorico($event, 1)"
+      (keydown.control.l)="limpar($event)"
+      spellcheck="false"
+      autocomplete="off"
+      autofocus />
+  </div>
+</div>
