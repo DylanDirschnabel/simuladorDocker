@@ -100,17 +100,18 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 8px;
-  border-left: 3px solid var(--app-accent);
-  border-radius: 4px;
-  background: var(--app-surface);
+  padding: 5px 12px;
+  border: 1px solid rgba(36, 150, 237, 0.45);
+  border-radius: 999px;
+  background: rgba(36, 150, 237, 0.1);
   font-family: var(--app-mono);
   font-size: 0.75rem;
   animation: chegar 0.35s ease-out backwards;
 }
 
 .camada.compartilhada {
-  border-left-color: #f0b429;
+  border-color: rgba(240, 180, 41, 0.5);
+  background: rgba(240, 180, 41, 0.1);
 }
 
 .modo {
@@ -143,4 +144,123 @@
     opacity: 0;
     transform: translateY(-12px);
   }
+}
+
+.arquivos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.arquivo {
+  width: 330px;
+  padding: 12px;
+  border: 1px solid var(--app-border);
+  border-radius: 8px;
+  background: var(--app-terminal-bg);
+}
+
+.arquivo header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+
+.linhas {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.linha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 0.75rem;
+}
+
+.linha code {
+  overflow: hidden;
+  font-family: var(--app-mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.linha .tipo {
+  flex-shrink: 0;
+  margin-left: auto;
+  padding: 0 6px;
+  border-radius: 8px;
+  font-size: 0.65rem;
+}
+
+.linha.tipo-base .tipo {
+  background: rgba(240, 180, 41, 0.15);
+  color: #f0b429;
+}
+
+.linha.tipo-camada .tipo {
+  background: rgba(36, 150, 237, 0.15);
+  color: var(--app-accent);
+}
+
+.linha.tipo-metadado .tipo {
+  border: 1px solid var(--app-border);
+  color: var(--app-text-muted);
+}
+
+.secao-imagens {
+  margin-top: 24px;
+}
+
+.arquivo {
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.arquivo:hover,
+.arquivo:focus-visible {
+  border-color: var(--app-accent);
+  outline: none;
+}
+
+.arquivo .nome .pi {
+  margin-left: 4px;
+  color: var(--app-text-muted);
+  font-size: 0.7rem;
+}
+
+.linha.tipo-imagem .tipo {
+  background: rgba(240, 180, 41, 0.15);
+  color: #f0b429;
+}
+
+.linha.tipo-build .tipo {
+  background: rgba(36, 150, 237, 0.15);
+  color: var(--app-accent);
+}
+
+.conteudo-arquivo {
+  margin: 0;
+  padding: 14px 16px;
+  overflow: auto;
+  border: 1px solid var(--app-border);
+  border-radius: 6px;
+  background: var(--app-terminal-bg);
+  font-family: var(--app-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.dica-arquivo {
+  margin: 12px 0 0;
+  color: var(--app-text-muted);
+  font-size: 0.8rem;
+}
+
+.dica-arquivo code {
+  color: var(--app-text);
+  font-family: var(--app-mono);
 }

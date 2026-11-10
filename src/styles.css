@@ -26,3 +26,21 @@ body {
   font-family: 'Segoe UI', Roboto, sans-serif;
   color-scheme: dark;
 }
+
+/* Tooltip dos passos do kernel (o PrimeNG anexa no body, fora do componente) */
+.p-tooltip.tooltip-passo {
+  max-width: 340px;
+}
+
+.tooltip-passo .p-tooltip-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 320px;
+  font-size: 0.8rem;
+}
+
+.tooltip-chamada {
+  font-family: var(--app-mono);
+  overflow-wrap: anywhere;
+}

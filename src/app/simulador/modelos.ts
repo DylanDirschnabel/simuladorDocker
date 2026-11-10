@@ -19,9 +19,11 @@ export interface Imagem {
   comando: string;
   processos: DefProcesso[];
   diretorios: Record<string, string[]>;
+  /** Linhas que o processo principal escreve ao subir (docker logs). */
+  logs?: string[];
 }
 
-export type EstadoContainer = 'running' | 'exited';
+export type EstadoContainer = 'created' | 'running' | 'exited';
 
 export interface Processo {
   pid: number;
@@ -37,17 +39,23 @@ export interface Container {
   imagem: Imagem;
   estado: EstadoContainer;
   criadoEm: Date;
+  iniciadoEm?: Date;
   finalizadoEm?: Date;
   codigoSaida: number;
-  oomKilled: boolean;
-  limiteMemoriaMB?: number;
   ip?: string;
   processos: Processo[];
   proximoPid: number;
+  /** Mapeamentos "host:contêiner", como no -p. */
+  portas: string[];
+  logs: string[];
+  /** Preenchidos quando o contêiner foi criado pelo docker compose. */
+  projeto?: string;
+  servico?: string;
 }
 
 export interface PassoKernel {
   categoria: string;
+  resumo: string;
   chamada: string;
   explicacao: string;
 }

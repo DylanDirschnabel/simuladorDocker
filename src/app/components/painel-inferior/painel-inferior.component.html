@@ -1,4 +1,4 @@
-<p-tabs value="kernel" scrollable>
+<p-tabs [(value)]="aba" (valueChange)="rolar()" scrollable>
   <p-tablist>
     <p-tab value="kernel"><i class="pi pi-microchip"></i> Ações no Kernel</p-tab>
     <p-tab value="recursos"><i class="pi pi-chart-bar"></i> Recursos</p-tab>
@@ -7,18 +7,39 @@
   <p-tabpanels>
     <p-tabpanel value="kernel">
       @if (operacao(); as op) {
-        <p class="contexto">O que o Docker fez para executar <code>{{ op.comando }}</code></p>
+        <div class="comando">
+          <code class="comando-texto">{{ op.comando }}</code>
+          <p class="comando-descricao">{{ descrever(op.comando)?.descricao }}</p>
+        </div>
+        @if (op.passos.length) {
+        <h4 class="subtitulo">Por baixo dos panos</h4>
         <div class="passos">
           @for (passo of op.passos; track $index; let i = $index, ultimo = $last) {
-            <div class="passo" [class.destaque]="ultimo" [style.animation-delay.ms]="i * 150">
+            <div
+              class="passo"
+              [class.destaque]="ultimo"
+              [style.animation-delay.ms]="i * 150"
+              [pTooltip]="detalhe"
+              tooltipPosition="top"
+              tooltipStyleClass="tooltip-passo">
               <span class="categoria">{{ i + 1 }} · {{ passo.categoria }}</span>
-              <code class="chamada">{{ passo.chamada }}</code>
-              <span class="explicacao">{{ passo.explicacao }}</span>
+              <span class="resumo">{{ passo.resumo }}</span>
             </div>
+            <ng-template #detalhe>
+              <code class="tooltip-chamada">{{ passo.chamada }}</code>
+              <span class="tooltip-explicacao">{{ passo.explicacao }}</span>
+            </ng-template>
           }
         </div>
+        } @else {
+          <p class="vazio">
+            {{ descrever(op.comando)?.consulta
+              ? 'Este comando só consulta o estado do Docker: nada muda por baixo.'
+              : 'Os passos internos deste comando não são detalhados no simulador.' }}
+          </p>
+        }
       } @else {
-        <p class="vazio">Execute um comando no terminal para ver o que acontece por baixo.</p>
+        <p class="vazio">Execute um comando no terminal para ver o que ele faz e o que acontece por baixo.</p>
       }
     </p-tabpanel>
 

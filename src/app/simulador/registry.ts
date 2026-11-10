@@ -17,6 +17,11 @@ export const REGISTRY: Imagem[] = [
       { digest: 'cd78b836a8bf', tamanhoMB: 0.0022, instrucao: 'COPY docker-entrypoint.d/' }
     ],
     comando: '/docker-entrypoint.sh nginx -g daemon off;',
+    logs: [
+      '/docker-entrypoint.sh: Configuration complete; ready for start up',
+      '[notice] 1#1: nginx/1.27.2',
+      '[notice] 1#1: start worker processes'
+    ],
     processos: [
       { usuario: 'root', comando: 'nginx: master process nginx -g daemon off;', memoriaMB: 5.8 },
       { usuario: 'nginx', comando: 'nginx: worker process', memoriaMB: 2.4 },
@@ -39,6 +44,7 @@ export const REGISTRY: Imagem[] = [
       { digest: '6f782338d982', tamanhoMB: 0.0011, instrucao: 'COPY docker-entrypoint.sh' }
     ],
     comando: 'docker-entrypoint.sh redis-server',
+    logs: ['1:C * Redis version=7.4.1, pid=1, just started', '1:M * Server initialized', '1:M * Ready to accept connections tcp'],
     processos: [{ usuario: 'redis', comando: 'redis-server *:6379', memoriaMB: 3.6 }],
     diretorios: {
       '/': [...RAIZ, 'data'].sort(),

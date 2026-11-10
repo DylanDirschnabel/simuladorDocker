@@ -6,6 +6,7 @@ import { TipoLinha } from '../../simulador/modelos';
 interface LinhaTerminal {
   tipo: TipoLinha | 'comando';
   texto: string;
+  prompt?: string;
 }
 
 @Component({
@@ -23,7 +24,7 @@ export class PainelTerminalComponent implements AfterViewChecked {
   private posicaoHistorico = 0;
   private rolarParaFim = false;
 
-  readonly prompt = 'user@host:~$';
+  readonly prompt = this.cli.prompt;
   comando = '';
   linhas: LinhaTerminal[] = [
     { tipo: 'saida', texto: 'Simulador Docker. Digite "help" para ver os comandos disponíveis.' }
@@ -31,7 +32,7 @@ export class PainelTerminalComponent implements AfterViewChecked {
 
   executar(): void {
     const texto = this.comando;
-    this.linhas.push({ tipo: 'comando', texto });
+    this.linhas.push({ tipo: 'comando', texto, prompt: this.prompt() });
     this.comando = '';
     this.rolarParaFim = true;
 

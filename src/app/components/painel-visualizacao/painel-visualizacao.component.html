@@ -4,7 +4,33 @@
   </header>
 
   <section class="area">
-    <h3 class="secao">Imagens</h3>
+    <h3 class="secao">Arquivos</h3>
+    <div class="arquivos">
+      @for (arquivo of arquivos; track arquivo.titulo) {
+        <div
+          class="arquivo"
+          role="button"
+          tabindex="0"
+          [title]="'Abrir ' + arquivo.titulo"
+          (click)="aberto.set(arquivo)"
+          (keydown.enter)="aberto.set(arquivo)">
+          <header>
+            <span class="nome">{{ arquivo.titulo }} <i class="pi pi-external-link"></i></span>
+            <code class="meta">{{ arquivo.comando }}</code>
+          </header>
+          <ol class="linhas">
+            @for (linha of arquivo.linhas; track $index) {
+              <li class="linha" [class]="'tipo-' + linha.tipo">
+                <code>{{ linha.texto }}</code>
+                <span class="tipo">{{ linha.tipo }}</span>
+              </li>
+            }
+          </ol>
+        </div>
+      }
+    </div>
+
+    <h3 class="secao secao-imagens">Imagens</h3>
 
     @if (!imagens().length) {
       <p class="vazio">Nenhuma imagem local. Tente <code>docker pull nginx</code> no terminal.</p>
@@ -38,3 +64,15 @@
     </div>
   </section>
 </div>
+
+<p-dialog
+  [visible]="!!aberto()"
+  (visibleChange)="!$event && aberto.set(null)"
+  [header]="aberto()?.titulo ?? ''"
+  [modal]="true"
+  [dismissableMask]="true"
+  [draggable]="false"
+  [style]="{ width: '560px', maxWidth: '92vw' }">
+  <pre class="conteudo-arquivo">{{ aberto()?.conteudo }}</pre>
+  <p class="dica-arquivo">No terminal: <code>{{ aberto()?.comando }}</code></p>
+</p-dialog>

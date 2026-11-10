@@ -10,6 +10,17 @@ export function hexAleatorio(tamanho = 64): string {
 
 export const idCurto = (id: string) => id.slice(0, 12);
 
+/** Hash estável de 12 caracteres hex: o mesmo texto gera sempre o mesmo digest (base do cache do build). */
+export function hashCurto(texto: string): string {
+  let a = 0x811c9dc5;
+  let b = 0x01000193;
+  for (const ch of texto) {
+    a = Math.imul(a ^ ch.charCodeAt(0), 16777619);
+    b = Math.imul(b ^ ch.charCodeAt(0), 2246822507);
+  }
+  return ((a >>> 0).toString(16).padStart(8, '0') + (b >>> 0).toString(16).padStart(8, '0')).slice(0, 12);
+}
+
 export function duracaoHumana(ms: number): string {
   const segundos = Math.floor(ms / 1000);
   if (segundos < 1) return 'Less than a second';
@@ -29,13 +40,6 @@ export const tempoAtras = (data: Date | string) => `${duracaoHumana(Date.now() -
 
 export const tamanho = (mb: number) =>
   mb < 1 ? `${parseFloat((mb * 1000).toPrecision(3))}kB` : `${parseFloat(mb.toPrecision(3))}MB`;
-
-export function analisarMemoria(texto: string): number {
-  const m = /^(\d+(?:\.\d+)?)([kmg])b?$/i.exec(texto);
-  if (!m) throw new ErroDocker(`valor de memória inválido: "${texto}" (use algo como 256m ou 1g)`);
-  const fator: Record<string, number> = { k: 1 / 1024, m: 1, g: 1024 };
-  return parseFloat(m[1]) * fator[m[2].toLowerCase()];
-}
 
 export function tabela(cabecalho: string[], linhas: string[][]): string[] {
   const larguras = cabecalho.map((c, i) => Math.max(c.length, ...linhas.map(l => l[i].length)));
